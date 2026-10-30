@@ -1,0 +1,10 @@
+table,issue,decision,reason
+patients,exact duplicate rows,remove duplicate rows while keeping the first occurrence.,Removing dulpicates makes sure eah patient record is unique and prevents inflation of the data.
+patients,gender spellings that are not a code,Standardize gender spellings to a consistent code.,Standardizing gender spellings ensures consistency and facilitates accurate analysis.
+patients,site codes needing normalization,Converted all site coes to Uppercase and removed any spaces or hyphens present.,Standardizes the format of all clinic location codes across tables.
+patients,birth_year sentinel 9999,Replaced sentinel value 9999 with missing values and cast to Int64.,Prevents unrealistic age values from altering analysis.
+vistis,weight column named wt_kg in visits_south.csv,Renamed the column to weight_kg during stack preparation.,Ensures uniform column naming across different visit tables allowing for combination.
+visits,sbp sentinel 999 and readings outside 70 through 250,Converted sentinel value 999 to missing values and restricted readings to the valid range of 70 to 250.,Ensures that only valid systolic blood pressure readings are used in analysis.
+visits,impossible and loosely written visit dates,"Parsed date strings exactly matching YYYY-MM-DD format and validated against the calendar, making invalid entries missing.",This removes impossible calendar dates to ensure accuracy.
+visits,repeated patient_id and visit pairs,Sort by visit time keeping the last occurrence to remove duplicate patient_id and visit pairs and account for rechecks.,"Ensures that each patient-visit combination is unique and the most recent measurement is retained, preventing data inflation."
+visits,repeated site_code rows,Keep only the current site records and unique site codes.,Ensures that each site code appears only once and reflects the current status.
